@@ -105,8 +105,17 @@ class Microsoft extends AbstractProvider
      */
     public function getResourceOwnerDetailsUrl(AccessToken $token)
     {
-        $uri = new Uri($this->urlResourceOwnerDetails);
+        return $this->urlResourceOwnerDetails;
+    }
 
-        return (string) Uri::withQueryValue($uri, 'access_token', (string) $token);
+    /**
+     * Returns authorization headers for the 'bearer' grant.
+     *
+     * @param  mixed|null $token Either a string or an access token instance
+     * @return array
+     */
+    protected function getAuthorizationHeaders($token = null)
+    {
+        return ['Authorization' => 'Bearer ' . $token];
     }
 }
